@@ -1,122 +1,59 @@
-# wxcloudrun-koa
+# 爱刷题PLUS--API
+爱刷题PLUS在[爱刷题](https://github.com/moke8/aishuati/)的基础上，舍弃了部署简单、纯前端部署等优势，加入了管理后台、更加方便管理操作和题库录入、修改等。
 
-[![GitHub license](https://img.shields.io/github/license/WeixinCloud/wxcloudrun-koa)](https://github.com/WeixinCloud/wxcloudrun-koa)
-![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/WeixinCloud/wxcloudrun-koa/koa)
-![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/WeixinCloud/wxcloudrun-koa/sequelize)
+在UI界面上采用了新的设计（原本大概属于没有设计）。
 
-微信云托管 Node.js Koa 框架模版，实现简单的计数器读写接口，使用云托管 MySQL 读写、记录计数值。
+具体内容可以查看[爱刷题PLUS--ADMIN](https://github.com/moke8/aishuati-plus-admin/)和[爱刷题PLUS--WECHAT](https://github.com/moke8/aishuati-plus-wechat/).
 
-![](https://qcloudimg.tencent-cloud.cn/raw/be22992d297d1b9a1a5365e606276781.png)
+## 后台优化
 
-## 快速开始
-前往 [微信云托管快速开始页面](https://cloud.weixin.qq.com/cloudrun/onekey)，选择相应语言的模板，根据引导完成部署。
+### 录入优化
+支持JSON题库录入（[（WORD转json）](https://github.com/moke8/aishuati/)）、Excel题库录入、Word文档录入
 
-## 本地调试
-下载代码在本地调试，请参考[微信云托管本地调试指南](https://developers.weixin.qq.com/miniprogram/dev/wxcloudrun/src/guide/debug/)
+支持后台在线修改题库以及内容
 
-## 实时开发
-代码变动时，不需要重新构建和启动容器，即可查看变动后的效果。请参考[微信云托管实时开发指南](https://developers.weixin.qq.com/miniprogram/dev/wxcloudrun/src/guide/debug/dev.html)
+### 星标题库
+推荐的题库将在首页展示，并在题库列表页置顶
 
-## Dockerfile最佳实践
-请参考[如何提高项目构建效率](https://developers.weixin.qq.com/miniprogram/dev/wxcloudrun/src/scene/build/speed.html)
+### 题库统计
+后台支持统计7天和30天内题库访问次数、题目累计错题次数
 
-## 项目结构说明
+### 意见反馈
+允许用户直接反馈和错题反馈，帮助管理者更好的管理项目
 
-```
-.
-├── Dockerfile
-├── README.md
-├── container.config.json  
-├── db.js
-├── index.js
-├── index.html
-├── package.json
-```
+### 用户管理
+支持统计用户近7天和近30天的访问次数
 
-- `index.js`：项目入口，实现主要的读写 API
-- `db.js`：数据库相关实现，使用 `sequelize` 作为 ORM
-- `index.html`：首页代码
-- `package.json`：Node.js 项目定义文件
-- `container.config.json`：模板部署「服务设置」初始化配置（二开请忽略）
-- `Dockerfile`：容器配置文件
+## 小程序特点
 
-## 服务 API 文档
+### 错误反馈
+直接反馈和错题反馈
 
-### `GET /api/count`
+### banner展示
+可以帮助引流到公众号等
 
-获取当前计数
+### 四种刷题模式
+顺序练习、错题练习、乱序练习、题型练习（单选、多选、简答、填空）
 
-#### 请求参数
-
-无
-
-#### 响应结果
-
-- `code`：错误码
-- `data`：当前计数值
-
-##### 响应结果示例
-
-```json
-{
-  "code": 0,
-  "data": 42
-}
-```
-
-#### 调用示例
-
-```
-curl https://<云托管服务域名>/api/count
-```
-
-### `POST /api/count`
-
-更新计数，自增或者清零
-
-#### 请求参数
-
-- `action`：`string` 类型，枚举值
-  - 等于 `"inc"` 时，表示计数加一
-  - 等于 `"clear"` 时，表示计数重置（清零）
-
-##### 请求参数示例
-
-```
-{
-  "action": "inc"
-}
-```
-
-#### 响应结果
-
-- `code`：错误码
-- `data`：当前计数值
-
-##### 响应结果示例
-
-```json
-{
-  "code": 0,
-  "data": 42
-}
-```
-
-#### 调用示例
-
-```
-curl -X POST -H 'content-type: application/json' -d '{"action": "inc"}' https://<云托管服务域名>/api/count
-```
-
-## 使用注意
-如果不是通过微信云托管控制台部署模板代码，而是自行复制/下载模板代码后，手动新建一个服务并部署，需要在「服务设置」中补全以下环境变量，才可正常使用，否则会引发无法连接数据库，进而导致部署失败。
-- MYSQL_ADDRESS
-- MYSQL_PASSWORD
-- MYSQL_USERNAME
-以上三个变量的值请按实际情况填写。如果使用云托管内MySQL，可以在控制台MySQL页面获取相关信息。
+### 自定义UI显示
+支持夜间模式、护眼模式、日间模式三种配色
+支持自定义字体大小
+支持自定义是否播放答题提示音
+支持自定义答对题目是否后自动下一页
 
 
+## API端开发构思
+内容分为题库、意见反馈、使用记录、用户管理几个部分
+具体可以到[爱刷题PLUS--ADMIN](https://github.com/moke8/aishuati-plus-admin/)和[爱刷题PLUS--WECHAT](https://github.com/moke8/aishuati-plus-wechat/)中查看
 
-## License
+## 配置
+### 小程序配置
+utils/global.js
 
-[MIT](./LICENSE)
+### 数据库配置
+sql/index.js
+
+## 开发
+API内容主要分为admin和wechat两个部分，分别对应管理后台和小程序的API。
+
+在层级上分为router、controllers、sql三个部分，也就是路由、控制器、数据库语句。
